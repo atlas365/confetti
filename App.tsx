@@ -1,22 +1,17 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-
-import Confetti from './components/ConfettiWrapper';
-import { Easing, useSharedValue, withTiming } from 'react-native-reanimated';
-import SlideLoadButton from './components/SlideLoadButton';
+import ChampagneBubbles from './components/ChampagneBubbles';
 
 function App(): JSX.Element {
-  const sharedValue = useSharedValue(1)
+  const [trigger, setTrigger] = React.useState(false);
+
   const onPress = () => {
-    sharedValue.value = withTiming(100, {
-      duration: 8000,
-      easing: Easing.bezier(0.1, 0.4, 0.5, 0.6),
-    });
-  }
+    setTrigger(true);
+  };
 
   const onReset = () => {
-    sharedValue.value = 1
-  }
+    setTrigger(false);
+  };
 
   return (
     <View style={styles.container}>
@@ -26,8 +21,7 @@ function App(): JSX.Element {
       <TouchableOpacity style={styles.button} onPress={onReset}>
         <Text>Reset</Text>
       </TouchableOpacity>
-      <SlideLoadButton />
-      <Confetti sharedValue={sharedValue}/>
+      <ChampagneBubbles trigger={trigger} />
     </View>
   );
 }
@@ -42,7 +36,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
     padding: 10,
-    marginBottom: 10
+    marginBottom: 10,
   },
 });
 
