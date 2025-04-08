@@ -36,7 +36,6 @@ const Confetti = ({sharedValue}) => {
       {confetti.map(({key, x, y, angle, color}) => {
         const modAngle = Math.random() < 0.5 ? -1 : 1;
         const endX = screenWidth * Math.random() + modAngle * 200;
-        const endY = screenHeight * (Math.random() / 2 + 1.3) + y;
         const angleVel = modAngle * Math.random() * 5 + 25;
 
         const style = useAnimatedStyle(() => {
